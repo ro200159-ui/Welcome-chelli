@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,6 +12,7 @@
       font-family: 'Segoe UI', sans-serif;
       color: #fff;
       text-align: center;
+      overflow: hidden;
     }
     .overlay {
       background: rgba(0, 0, 0, 0.6);
@@ -54,6 +54,18 @@
       50% { transform: scale(1.1); opacity: 1; }
       100% { transform: scale(1); }
     }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: gold;
+      animation: fall 3s infinite;
+      z-index: 0;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -63,9 +75,7 @@
     <br />
     <button onclick="showMessage()">Reveal Message</button>
     <div id="result"></div>
-  </div>
-
-  <script>
+  </div>  <script>
     const lines = [
       "You're the most energetic soul in the room!",
       "You light up the world with your smile!",
@@ -82,13 +92,30 @@
     function showMessage() {
       const name = document.getElementById('nameInput').value.trim();
       const resultDiv = document.getElementById('result');
+
       if (name) {
         const randomLine = lines[Math.floor(Math.random() * lines.length)];
-        resultDiv.innerHTML = `Hi <strong>${name}</strong>!<br/>🌟 ${randomLine}`;
+        resultDiv.innerHTML = `🎉 Hey <strong>${name}</strong>! Welcome to Cine Fest 2025!<br/>✨ ${randomLine}`;
+        launchConfetti();
       } else {
         resultDiv.innerText = "Please enter your name!";
       }
     }
-  </script>
-</body>
+
+    function launchConfetti() {
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-10px';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 5000);
+      }
+    }
+  </script></body>
 </html>

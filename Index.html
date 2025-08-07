@@ -15,7 +15,7 @@
       overflow: hidden;
     }
     .overlay {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.7);
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -24,7 +24,7 @@
       padding: 20px;
     }
     h1 {
-      font-size: 30px;
+      font-size: 36px;
       margin-bottom: 20px;
     }
     input {
@@ -43,16 +43,26 @@
       color: white;
       cursor: pointer;
     }
-    #result {
-      margin-top: 25px;
-      font-size: 24px;
-      font-weight: bold;
-      animation: bounce 1s ease;
+    #welcomeBox {
+      display: none;
+      margin-top: 30px;
+      animation: pop 0.8s ease forwards;
     }
-    @keyframes bounce {
-      0% { transform: scale(0.9); opacity: 0; }
-      50% { transform: scale(1.1); opacity: 1; }
-      100% { transform: scale(1); }
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1.1); opacity: 1; }
+    }
+    .welcome-message {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #ffeb3b;
+      text-shadow: 2px 2px 5px #000;
+    }
+    .quote {
+      font-size: 20px;
+      font-style: italic;
+      color: #fff;
     }
     .confetti {
       position: absolute;
@@ -70,11 +80,14 @@
 </head>
 <body>
   <div class="overlay">
-    <h1>Welcome to Cine Fest 2025 🎬</h1>
+    <h1>Cine Fest 2025 🎬</h1>
     <input type="text" id="nameInput" placeholder="Enter your name" />
     <br />
-    <button onclick="showMessage()">Reveal Message</button>
-    <div id="result"></div>
+    <button onclick="showMessage()">Join the Party</button>
+    <div id="welcomeBox">
+      <div class="welcome-message" id="greeting"></div>
+      <div class="quote" id="quote"></div>
+    </div>
   </div>  <script>
     const lines = [
       "You're the most energetic soul in the room!",
@@ -91,14 +104,20 @@
 
     function showMessage() {
       const name = document.getElementById('nameInput').value.trim();
-      const resultDiv = document.getElementById('result');
+      const greeting = document.getElementById('greeting');
+      const quote = document.getElementById('quote');
+      const welcomeBox = document.getElementById('welcomeBox');
 
       if (name) {
         const randomLine = lines[Math.floor(Math.random() * lines.length)];
-        resultDiv.innerHTML = `🎉 Hey <strong>${name}</strong>! Welcome to Cine Fest 2025!<br/>✨ ${randomLine}`;
+        greeting.innerHTML = `🎉 Hey <span style='color:#00e5ff'>${name}</span>! Welcome to <strong>Cine Fest 2025</strong>! 🎉`;
+        quote.innerHTML = `✨ ${randomLine}`;
+        welcomeBox.style.display = 'block';
         launchConfetti();
       } else {
-        resultDiv.innerText = "Please enter your name!";
+        greeting.innerText = "Please enter your name!";
+        quote.innerText = "";
+        welcomeBox.style.display = 'block';
       }
     }
 

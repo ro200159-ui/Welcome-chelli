@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cine Fest Invitation</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('https://images.unsplash.com/photo-1607082352334-09c84f70cc52?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      text-align: center;
+    }
+    .overlay {
+      background: rgba(0, 0, 0, 0.6);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 25px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+      background-color: #ff4081;
+      color: white;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 25px;
+      font-size: 24px;
+      font-weight: bold;
+      animation: bounce 1s ease;
+    }
+    @keyframes bounce {
+      0% { transform: scale(0.9); opacity: 0; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Welcome to Cine Fest 2025 🎬</h1>
+    <input type="text" id="nameInput" placeholder="Enter your name" />
+    <br />
+    <button onclick="showMessage()">Reveal Message</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const lines = [
+      "You're the most energetic soul in the room!",
+      "You light up the world with your smile!",
+      "Your vibe is simply unforgettable!",
+      "You’re born to shine, never forget that!",
+      "Your presence makes everything special!",
+      "You are a true inspiration to others!",
+      "You bring sparkle wherever you go!",
+      "You make every moment magical!",
+      "You're not just a guest, you're the star!",
+      "Your kindness makes the world brighter!"
+    ];
+
+    function showMessage() {
+      const name = document.getElementById('nameInput').value.trim();
+      const resultDiv = document.getElementById('result');
+      if (name) {
+        const randomLine = lines[Math.floor(Math.random() * lines.length)];
+        resultDiv.innerHTML = `Hi <strong>${name}</strong>!<br/>🌟 ${randomLine}`;
+      } else {
+        resultDiv.innerText = "Please enter your name!";
+      }
+    }
+  </script>
+</body>
+</html>
